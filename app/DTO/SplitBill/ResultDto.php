@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\DTO\SplitBill;
 
-use App\Helpers\MoneyFormatter;
-
 final readonly class ResultDto
 {
     /**
@@ -15,15 +13,4 @@ final readonly class ResultDto
         public int $totalCents,
         public array $shares
     ) {}
-
-    public function toArray(): array
-    {
-        return [
-            'total' => MoneyFormatter::fromCents($this->totalCents),
-            'shares' => array_map(
-                fn (ShareDto $share) => $share->toArray(),
-                $this->shares,
-            ),
-        ];
-    }
 }
